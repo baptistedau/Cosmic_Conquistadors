@@ -1,6 +1,8 @@
 import java.awt.*;
 
 public class Main {
+
+
     public static void main(String[] args) {
 
         StdDraw.setCanvasSize(1200, 700);
@@ -39,7 +41,7 @@ public class Main {
                 StdAudio.close();
             }
             if (StdDraw.isKeyPressed(32)) {
-                quit = newI.test();
+                quit = newI.Update();
             }
             StdDraw.show();
             StdDraw.pause(10);

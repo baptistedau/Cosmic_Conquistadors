@@ -1,54 +1,61 @@
+import java.util.ArrayList;
+
 public class Invaders {
 
-    Enemy enemies;
+    public ArrayList<Enemy> enemies = new ArrayList<>();
+    public ArrayList<Missile> missiles = new ArrayList<>();
+    public static int time = 0;
 
-    public boolean test() {
-
-
-        StdDraw.setCanvasSize(1200, 700);
-        StdDraw.setYscale(-350, 350);
-        StdDraw.setXscale(-600, 600);
-        StdDraw.enableDoubleBuffering();
-
-        int time = 0;
+    public boolean Update() {
         Shooter shooter = new Shooter(300, 10);
-        enemies = new Enemy(0);
-
+        StdDraw.enableDoubleBuffering();
         while (true) {
-
+            StdDraw.clear();
             //part where we get the Keys pressed
+
+            if (time % 50 == 0)
+                enemies.add(new Enemy(0, 350));
+
             if (StdDraw.isKeyPressed(68))
                 shooter.Move_right();
             if (StdDraw.isKeyPressed(65))
                 shooter.Move_left();
-            if (StdDraw.isKeyPressed(32) && time % 10 == 0) {
-                time = 10;
-                shooter.Shoot();
+            if (StdDraw.isKeyPressed(32) && time % 8 == 0) {
+                missiles.add(new Missile(shooter.getXposition(), -300, shooter.angle));
             }
             if (StdDraw.isKeyPressed(90) && time % 10 == 0)
                 shooter.setAngle(Math.PI / 32);
             if (StdDraw.isKeyPressed(66) && time % 10 == 0)
                 shooter.setAngle(-Math.PI / 32);
 
-            //part where we Update every item position
-            if (enemies != null) {
-                if (time % 20 == 0) {
-                    enemies.Move();
+            for (int i = 0; i < missiles.size(); i++) {
+                if (missiles.get(i).Move()) {
+                    missiles.get(i).Print();
+                    for (int j = 0; j < enemies.size(); j++) {
+                        if (missiles.get(i).contact(enemies.get(j))) {
+                            enemies.remove(j);
+                            missiles.remove(i);
+                            break;
+                        }
+                    }
+                } else
+                    missiles.remove(i);
+
+            }
+
+            for (int i = 0; i < enemies.size(); i++) {
+                if (enemies.get(i).Move())
+                    enemies.get(i).Print();
+                else {
+                    enemies.remove(i);
+                    StdOut.println("fini");
                 }
-                if (time % 40 == 0)
-                    enemies.NewWave();
-            }
-            if (shooter.missile != null) {
-                shooter.missile.Move();
+
             }
 
-            //part where we print all the modifications.
-            StdDraw.clear();
 
-            if (shooter.missile != null)
-                shooter.missile.Print();
-            enemies.Print();
-            StdDraw.filledSquare(shooter.getXposition(), -300, 30);
+            shooter.Print();
+
 
             StdDraw.show();
             StdDraw.pause(30);
