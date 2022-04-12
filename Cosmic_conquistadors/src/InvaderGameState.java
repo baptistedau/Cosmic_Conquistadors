@@ -31,6 +31,7 @@ public class InvaderGameState {
         boolean quit = false;
         NewWave();
 
+        StdOut.println("test");
 
         while (!quit) {
             StdDraw.clear();
