@@ -11,7 +11,7 @@ public class Missile extends DefaultCritter {
 
 
     public boolean Move() {
-        if (y + 10 < 350 && x + 10 < 600 && x - 10 > -600) {
+        if (y + 10 < Invaders.scaleYMax && x + 10 < Invaders.scaleXMax && x - 10 > Invaders.scaleMin) {
             x += (speed) * Math.cos(angle);
             y += (speed) * Math.sin(angle);
             return true;

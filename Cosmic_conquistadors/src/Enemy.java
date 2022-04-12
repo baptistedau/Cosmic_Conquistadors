@@ -4,20 +4,20 @@ public class Enemy extends DefaultCritter {
     public Enemy(double curX, double curY) {
         x = curX;
         y = curY;
-        angle = Math.PI / 2;
+        angle = 1;
         speed = 2;
-        size = 20;
+        size = 30;
     }
 
     public boolean Move() {
-        if (y - speed > -350) {
-            y -= speed;
-            return true;
+        if (InvaderGameState.time % 30 == 0) {
+            angle = -angle;
+            y -= 8 * speed;
+        } else {
+            x += angle * speed;
         }
-        return false;
+        return (y - 8 * speed > Invaders.scaleMin || contact(InvaderGameState.shooter));
     }
 
-    public void NewWave() {
 
-    }
 }

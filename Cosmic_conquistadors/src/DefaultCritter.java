@@ -25,7 +25,6 @@ public class DefaultCritter {
 
     public boolean contact(DefaultCritter b) {
         double dist = (this.size + b.size) / 2;
-        //if (Math.sqrt((this.x - b.x) * (this.x - b.x) - (this.y - b.y) * (this.y - b.x)) <= dist)
         if (Math.abs(this.y - b.y) <= dist && Math.abs(this.x - b.x) <= dist)
             return true;
         return false;
