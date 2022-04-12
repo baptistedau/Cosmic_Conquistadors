@@ -12,6 +12,7 @@ public class InvaderGameState {
     public static int time;
     public static int time_shoot;
     public static int score;
+    public static int Level;
 
     public InvaderGameState() {
         enemies = new ArrayList<>();
@@ -21,6 +22,7 @@ public class InvaderGameState {
         time = 0;
         time_shoot = 0;
         score = 0;
+        Level = 0;
     }
 
 
@@ -29,11 +31,11 @@ public class InvaderGameState {
         boolean quit = false;
         NewWave();
 
-        
+
         while (!quit) {
             StdDraw.clear();
             //part where we get the Keys pressed
-            if (time % 200 == 0)
+            if (time % 200 == 0 && time < 800)
                 NewWave();
 
 
@@ -61,7 +63,7 @@ public class InvaderGameState {
                 if (missiles.get(i).Move()) {
                     missiles.get(i).Print();
                     for (int j = 0; j < enemies.size(); j++) {
-                        if (missiles.get(i).contact(enemies.get(j))) {
+                        if (missiles.get(i).contact(enemies.get(j), 2)) {
                             enemies.remove(j);
                             missiles.remove(i);
                             score++;

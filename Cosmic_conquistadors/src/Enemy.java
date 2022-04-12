@@ -1,12 +1,13 @@
 public class Enemy extends DefaultCritter {
 
+    int level;
 
     public Enemy(double curX, double curY) {
         x = curX;
         y = curY;
         angle = 1;
         speed = 2;
-        size = 30;
+        size = 32;
     }
 
     public boolean Move() {
@@ -16,7 +17,7 @@ public class Enemy extends DefaultCritter {
         } else {
             x += angle * speed;
         }
-        return (y - 8 * speed > Invaders.scaleMin || contact(InvaderGameState.shooter));
+        return (y - 8 * speed > Invaders.scaleMin && !contact(InvaderGameState.shooter, 2));
     }
 
 

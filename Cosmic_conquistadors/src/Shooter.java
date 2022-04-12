@@ -2,14 +2,14 @@ public class Shooter extends DefaultCritter {
 
 
     public Shooter() {
-        size = 30;
+        size = 32;
         x = Invaders.scaleXMax / 2;
         y = Invaders.scaleMin + size;
         speed = 10;
         angle = Math.PI / 2;
 
     }
-    
+
     public void setAngle(double n) {
         if (angle + n < Math.PI && angle + n > 0)
             angle += n;

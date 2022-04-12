@@ -23,8 +23,8 @@ public class DefaultCritter {
         StdDraw.filledSquare(x, y, size);
     }
 
-    public boolean contact(DefaultCritter b) {
-        double dist = (this.size + b.size) / 2;
+    public boolean contact(DefaultCritter b, int n) {
+        double dist = (this.size + b.size) / n;
         if (Math.abs(this.y - b.y) <= dist && Math.abs(this.x - b.x) <= dist)
             return true;
         return false;
