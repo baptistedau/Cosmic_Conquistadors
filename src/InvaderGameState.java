@@ -28,8 +28,6 @@ public class InvaderGameState {
         StdDraw.enableDoubleBuffering();
         boolean quit = false;
         NewWave();
-
-        System.out.print("Hi");
         
         while (!quit) {
             StdDraw.clear();
