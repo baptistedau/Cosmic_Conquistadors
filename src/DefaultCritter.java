@@ -5,7 +5,21 @@ public class DefaultCritter {
     double speed;
     double angle;
     double size;
-    String Picture;
+    String player_pic;
+    String invader_pic;
+    String Print;
+
+    public void player_pic() {
+        StdDraw.picture(x, y, "../resources/player.png", 100, 100);
+    }
+
+    public void Print() {
+        StdDraw.filledSquare(x, y, size);
+    }
+
+    public void invader_pic() {
+        StdDraw.picture(x, y, "../resources/enemy1.png");
+    }
 
     public double getXposition() {
         return x;
@@ -19,9 +33,6 @@ public class DefaultCritter {
         return speed;
     }
 
-    public void Print() {
-        StdDraw.filledSquare(x, y, size);
-    }
 
     public boolean contact(DefaultCritter b) {
         double dist = (this.size + b.size) / 2;

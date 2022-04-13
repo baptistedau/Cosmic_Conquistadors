@@ -12,6 +12,7 @@ public class InvaderGameState {
     public static int time;
     public static int time_shoot;
     public static int score;
+    //public int inm = 1;
 
     public InvaderGameState() {
         enemies = new ArrayList<>();
@@ -29,9 +30,10 @@ public class InvaderGameState {
         boolean quit = false;
         NewWave();
 
-        
         while (!quit) {
+
             StdDraw.clear();
+            StdDraw.picture(0.25, 0.25, "../resources/back.png", 2500, 1800);
             //part where we get the Keys pressed
             if (time % 200 == 0)
                 NewWave();
@@ -46,7 +48,7 @@ public class InvaderGameState {
                 shooter.Move_left();
 
             if (StdDraw.isKeyPressed(32) && time_shoot == 0) {
-                time_shoot = 10;
+                time_shoot = 5;
                 missiles.add(new Missile(shooter.getXposition(), -300, shooter.angle));
             }
 
@@ -74,14 +76,15 @@ public class InvaderGameState {
 
 
             for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).Move())
-                    enemies.get(i).Print();
-                else {
+                if (enemies.get(i).Move()) {
+                    enemies.get(i).invader_pic();
+                } else {
                     quit = true;
                 }
             }
 
-            shooter.Print();
+
+            shooter.player_pic();
             StdDraw.show();
             StdDraw.pause(20);
 
@@ -89,7 +92,6 @@ public class InvaderGameState {
             if (time_shoot > 0)
                 time_shoot--;
         }
-
     }
 
     public static void NewWave() {
@@ -123,7 +125,7 @@ public class InvaderGameState {
 
             if (StdDraw.isKeyPressed(10) || StdDraw.isKeyPressed(81)) {
                 quit = true;
-                StdAudio.close();
+                //StdAudio.close();
             }
             if (StdDraw.isKeyPressed(32)) {
                 quit = true;

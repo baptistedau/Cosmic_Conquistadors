@@ -5,11 +5,11 @@ public class Shooter extends DefaultCritter {
         size = 30;
         x = Invaders.scaleXMax / 2;
         y = Invaders.scaleMin + size;
-        speed = 10;
+        speed = 40;
         angle = Math.PI / 2;
 
     }
-    
+
     public void setAngle(double n) {
         if (angle + n < Math.PI && angle + n > 0)
             angle += n;

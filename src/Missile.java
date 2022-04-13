@@ -5,7 +5,7 @@ public class Missile extends DefaultCritter {
         x = X;
         y = Y;
         angle = dir;
-        speed = 20;
+        speed = 40;
         size = 10;
     }
 
