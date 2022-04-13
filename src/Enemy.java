@@ -1,12 +1,15 @@
 public class Enemy extends DefaultCritter {
 
 
-    public Enemy(double curX, double curY) {
+    public Enemy(double curX, double curY, int level) {
         x = curX;
         y = curY;
         angle = 1;
         speed = 2;
         size = 30;
+        if (level == 0) {
+            
+        }
     }
 
     public boolean Move() {

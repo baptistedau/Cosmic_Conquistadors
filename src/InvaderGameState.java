@@ -29,6 +29,7 @@ public class InvaderGameState {
         boolean quit = false;
         NewWave();
 
+        
         while (!quit) {
             StdDraw.clear();
             //part where we get the Keys pressed
