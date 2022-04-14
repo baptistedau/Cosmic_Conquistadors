@@ -122,6 +122,7 @@ public class InvaderGameState {
 
         StdDraw.picture(Invaders.scaleYMax / 2, Invaders.scaleYMax / 2, "../resources/BackgroundGame.jpg", Invaders.scaleXMax + 300, Invaders.scaleYMax);
         StdDraw.setFont(new Font("Castellar", Font.BOLD, 25));
+        StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.text(Invaders.scaleXMax + 100, Invaders.scaleYMax - 50, "Level " + Level);
         StdDraw.text(Invaders.scaleXMax + 100, Invaders.scaleYMax - 100, "Score: " + score);
     }
@@ -145,7 +146,8 @@ public class InvaderGameState {
             StdDraw.text(0, 200, "Cosmic Conquistadors");
             StdDraw.setFont(rest);
             StdDraw.text(0, 100, "Controls:");
-            StdDraw.text(0, 75, "(A) Move Left    (D) Move Right    (SPACEBAR) Shoot");
+            StdDraw.text(0, 50, "(UP Arrow) Rotate Left    (DOWN Arrow) Rotate Right   (C) Reset Rotation");
+            StdDraw.text(0, 75, "(LEFT Arrow) Move Left    (RIGHT Arrow) Move Right    (SPACEBAR) Shoot");
             StdDraw.text(0, -200, "(Q) Quit Game");
             StdDraw.setFont(star);
             StdDraw.text(0, -100, "(START) START Game");
