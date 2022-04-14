@@ -25,13 +25,14 @@ public class InvaderGameState {
         Level = 1;
     }
 
-    public void Play() {
+    public boolean Play() {
         boolean state = true;
         while (state) {
             state = Update();
             Level += 1;
             StdDraw.pause(100);
         }
+        return GameOver();
 
 
     }
@@ -162,6 +163,40 @@ public class InvaderGameState {
             StdDraw.show();
             StdDraw.pause(20);
         }
+    }
+
+    public boolean GameOver() {
+        boolean quit = true;
+        while (quit) {
+            StdDraw.enableDoubleBuffering();
+
+            StdDraw.clear(StdDraw.BLACK);
+            StdDraw.setPenColor(StdDraw.BOOK_RED);
+
+            Font gameover = new Font("Castellar", Font.BOLD, 60);
+            Font quitgame = new Font("Castellar", Font.BOLD, 50);
+            Font restart = new Font("Castellar", Font.BOLD, 50);
+
+            StdDraw.setFont(gameover);
+            StdDraw.text(400, 600, " GAME OVER ");
+            StdDraw.setFont(quitgame);
+            StdDraw.text(400, 400, " QUIT (Q)");
+            StdDraw.setFont(restart);
+            StdDraw.text(400, 200, "RESTART (R)");
+
+            StdDraw.show();
+            StdDraw.pause(10);
+
+            if (StdDraw.isKeyPressed(KeyEvent.VK_R)) {
+                return true;
+            }
+
+            if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
+                quit = false;
+            }
+        }
+        return false;
+
     }
 
 }
