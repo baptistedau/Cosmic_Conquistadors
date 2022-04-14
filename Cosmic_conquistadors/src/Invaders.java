@@ -9,7 +9,7 @@ public class Invaders {
         StdDraw.setCanvasSize(1200, 700);
 
 
-        StdAudio.loop("../resources/MenuMusic.wav");
+        //StdAudio.loop("../resources/MenuMusic.wav");
         boolean loop = true;
         while (loop) {
             InvaderGameState Game = new InvaderGameState();

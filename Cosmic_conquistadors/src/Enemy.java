@@ -1,12 +1,14 @@
 public class Enemy extends DefaultCritter {
 
-    int level;
 
     public Enemy(double curX, double curY) {
         x = curX;
         y = curY;
         angle = 1;
-        speed = 5;
+        if (InvaderGameState.Level < 6)
+            speed = 5;
+        else
+            speed = 7;
         size = 32;
         Picture = "../resources/Enemy.png";
     }

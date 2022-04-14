@@ -10,11 +10,7 @@ public class DefaultCritter {
     public double getXposition() {
         return x;
     }
-
-    public double getYposition() {
-        return y;
-    }
-
+    
     public double getSpeed() {
         return speed;
     }

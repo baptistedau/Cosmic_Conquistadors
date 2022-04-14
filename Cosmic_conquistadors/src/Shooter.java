@@ -15,15 +15,14 @@ public class Shooter extends DefaultCritter {
         if (angle + n < 90 && angle + n > -90)
             angle += n;
     }
-
-
+    
     public void Move_right() {
-        if (x + size < Invaders.scaleXMax)
+        if (x + speed < Invaders.scaleXMax)
             x += speed;
     }
 
     public void Move_left() {
-        if (x - size > Invaders.scaleMin)
+        if (x - speed > Invaders.scaleMin)
             x -= speed;
     }
 
