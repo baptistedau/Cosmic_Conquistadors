@@ -20,10 +20,13 @@ public class DefaultCritter {
     }
 
     public void Print() {
-        StdDraw.filledSquare(x, y, size);
+        if (Picture != null)
+            StdDraw.picture(x, y, Picture, size * 2, size * 2, angle);
+        else
+            StdDraw.filledSquare(x, y, size);
     }
 
-    public boolean contact(DefaultCritter b, int n) {
+    public boolean contact(DefaultCritter b, double n) {
         double dist = (this.size + b.size) / n;
         if (Math.abs(this.y - b.y) <= dist && Math.abs(this.x - b.x) <= dist)
             return true;

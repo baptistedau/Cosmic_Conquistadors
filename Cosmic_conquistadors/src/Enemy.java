@@ -6,18 +6,19 @@ public class Enemy extends DefaultCritter {
         x = curX;
         y = curY;
         angle = 1;
-        speed = 2;
+        speed = 5;
         size = 32;
+        Picture = "../resources/Enemy.png";
     }
 
     public boolean Move() {
         if (InvaderGameState.time % 30 == 0) {
             angle = -angle;
-            y -= 8 * speed;
+            y -= 6 * speed;
         } else {
             x += angle * speed;
         }
-        return (y - 8 * speed > Invaders.scaleMin && !contact(InvaderGameState.shooter, 2));
+        return (y - 6 * speed > Invaders.scaleMin && !contact(InvaderGameState.shooter, 1));
     }
 
 

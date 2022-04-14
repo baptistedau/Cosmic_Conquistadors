@@ -19,7 +19,7 @@ public class Invaders {
         StdDraw.setXscale(scaleMin, scaleXMax + 200);
         StdDraw.setYscale(scaleMin, scaleYMax);
 
-        Game.Update();
+        Game.Play();
         System.exit(0);
     }
 

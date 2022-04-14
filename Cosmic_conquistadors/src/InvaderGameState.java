@@ -20,24 +20,39 @@ public class InvaderGameState {
         shooter = new Shooter();
 
         time = 0;
-        time_shoot = 0;
+        time_shoot = 10;
         score = 0;
-        Level = 0;
+        Level = 1;
+    }
+
+    public void Play() {
+        boolean state = true;
+        while (state) {
+            state = Update();
+            Level += 1;
+            StdDraw.pause(100);
+        }
+
+
     }
 
 
-    public void Update() {
+    public boolean Update() {
         StdDraw.enableDoubleBuffering();
         boolean quit = false;
-        NewWave();
-
+        //StdOut.println("test");
+        time = 0;
 
         while (!quit) {
             StdDraw.clear();
             //part where we get the Keys pressed
-            if (time % 200 == 0 && time < 800)
+            if (time % 75 == 0 && time < (2 + Level) * 75)
                 NewWave();
+            PrintBackground();
 
+            if (score != 0 && enemies.size() == 0) {
+                return true;
+            }
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q))
                 quit = true;
@@ -49,15 +64,15 @@ public class InvaderGameState {
 
             if (StdDraw.isKeyPressed(32) && time_shoot == 0) {
                 time_shoot = 10;
-                missiles.add(new Missile(shooter.getXposition(), -300, shooter.angle));
+                missiles.add(new Missile(shooter.getXposition(), Invaders.scaleMin + shooter.size * 2, shooter.angle));
             }
 
-            if (StdDraw.isKeyPressed(KeyEvent.VK_UP) && time % 10 == 0)
-                shooter.setAngle(Math.PI / 32);
-            if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && time % 10 == 0)
-                shooter.setAngle(-Math.PI / 32);
+            if (StdDraw.isKeyPressed(KeyEvent.VK_UP))
+                shooter.setAngle(10);
+            if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN))
+                shooter.setAngle(-10);
             if (StdDraw.isKeyPressed(KeyEvent.VK_C))
-                shooter.angle = Math.PI / 2;
+                shooter.angle = 0;
 
             for (int i = 0; i < missiles.size(); i++) {
                 if (missiles.get(i).Move()) {
@@ -66,6 +81,7 @@ public class InvaderGameState {
                         if (missiles.get(i).contact(enemies.get(j), 2)) {
                             enemies.remove(j);
                             missiles.remove(i);
+                            StdAudio.play("../resources/EnemyHit.wav");
                             score++;
                             break;
                         }
@@ -91,14 +107,25 @@ public class InvaderGameState {
             if (time_shoot > 0)
                 time_shoot--;
         }
+        return false;
 
     }
 
     public static void NewWave() {
-        for (int x = Invaders.scaleMin + 100; x < Invaders.scaleXMax - 50; x += 80) {
+        double x = Invaders.scaleMin + 200;
+        for (; x < Invaders.scaleXMax - 200; x += 80) {
             enemies.add(new Enemy(x, Invaders.scaleYMax));
         }
     }
+
+    public void PrintBackground() {
+
+        StdDraw.picture(Invaders.scaleYMax / 2, Invaders.scaleYMax / 2, "../resources/BackgroundGame.jpg", Invaders.scaleXMax + 300, Invaders.scaleYMax);
+        StdDraw.setFont(new Font("Castellar", Font.BOLD, 25));
+        StdDraw.text(Invaders.scaleXMax + 100, Invaders.scaleYMax - 50, "Level " + Level);
+        StdDraw.text(Invaders.scaleXMax + 100, Invaders.scaleYMax - 100, "Score: " + score);
+    }
+
 
     public void PrintMenu() {
         boolean quit = false;
@@ -131,7 +158,7 @@ public class InvaderGameState {
                 quit = true;
             }
             StdDraw.show();
-            StdDraw.pause(10);
+            StdDraw.pause(20);
         }
     }
 
